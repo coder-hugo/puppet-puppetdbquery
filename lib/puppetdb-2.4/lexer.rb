@@ -8,9 +8,9 @@ require 'racc/parser'
 # vim: syntax=ruby
 
 require 'yaml'
-require 'puppetdb-2.3'
+require 'puppetdb-2.4'
 
-class PuppetDB::Lexer < Racc::Parser
+class PuppetDB_2_4::Lexer < Racc::Parser
   require 'strscan'
 
   class ScanError < StandardError ; end

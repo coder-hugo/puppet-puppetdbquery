@@ -3,8 +3,8 @@ require 'puppet/face'
 require 'puppet/util/colors'
 
 Puppet::Face.define(:query, '1.0.0') do
-  require 'puppetdb-2.3/connection'
-  PuppetDB::Connection.check_version
+  require 'puppetdb-2.4/connection'
+  PuppetDB_2_4::Connection.check_version
 
   extend Puppet::Util::Colors
 
@@ -45,8 +45,8 @@ Puppet::Face.define(:query, '1.0.0') do
     end
 
     when_invoked do |query, options|
-      puppetdb = PuppetDB::Connection.new options[:host], options[:port], !options[:no_ssl]
-      parser = PuppetDB::Parser.new
+      puppetdb = PuppetDB_2_4::Connection.new options[:host], options[:port], !options[:no_ssl]
+      parser = PuppetDB_2_4::Parser.new
       if options[:facts] != ''
         facts = options[:facts].split(',')
         factquery = parser.facts_query(query, facts)
@@ -75,8 +75,8 @@ Puppet::Face.define(:query, '1.0.0') do
     end
 
     when_invoked do |query, options|
-      puppetdb = PuppetDB::Connection.new options[:host], options[:port], !options[:no_ssl]
-      parser = PuppetDB::Parser.new
+      puppetdb = PuppetDB_2_4::Connection.new options[:host], options[:port], !options[:no_ssl]
+      parser = PuppetDB_2_4::Parser.new
       query = parser.parse(query, :nodes)
 
       if options[:node_info]
@@ -130,8 +130,8 @@ Puppet::Face.define(:query, '1.0.0') do
         raise
       end
 
-      puppetdb = PuppetDB::Connection.new options[:host], options[:port], !options[:no_ssl]
-      parser = PuppetDB::Parser.new
+      puppetdb = PuppetDB_2_4::Connection.new options[:host], options[:port], !options[:no_ssl]
+      parser = PuppetDB_2_4::Parser.new
       nodes = puppetdb.query(:nodes, parser.parse(query, :nodes)).collect { |n| n['certname'] }
       starttime = Chronic.parse(options[:since], :context => :past, :guess => false).first.getutc.strftime('%FT%T.000Z')
       endtime = Chronic.parse(options[:until], :context => :past, :guess => false).last.getutc.strftime('%FT%T.000Z')

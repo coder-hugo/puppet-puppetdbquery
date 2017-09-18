@@ -1,8 +1,8 @@
-require 'puppetdb-2.3'
+require 'puppetdb-2.4'
 
-class PuppetDB::Connection
+class PuppetDB_2_4::Connection
   require 'rubygems'
-  require 'puppetdb-2.3/parser'
+  require 'puppetdb-2.4/parser'
   require 'uri'
   require 'puppet'
   require 'puppet/util/logging'
@@ -56,7 +56,7 @@ EOT
     headers = { 'Accept' => 'application/json' }
 
     if options[:extract]
-      query = PuppetDB::ParserHelper.extract(*Array(options[:extract]), query)
+      query = PuppetDB_2_4::ParserHelper.extract(*Array(options[:extract]), query)
     end
 
     uri = "/pdb/query/#{version}/#{endpoint}"

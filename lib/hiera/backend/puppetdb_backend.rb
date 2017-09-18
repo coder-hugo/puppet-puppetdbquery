@@ -2,13 +2,13 @@ class Hiera
   module Backend
     class Puppetdb_backend
       def initialize
-        require 'puppetdb-2.3/connection'
+        require 'puppetdb-2.4/connection'
         begin
           require 'puppet'
           # This is needed when we run from hiera cli
           Puppet.initialize_settings unless Puppet[:confdir]
           require 'puppet/util/puppetdb'
-          PuppetDB::Connection.check_version
+          PuppetDB_2_4::Connection.check_version
           uri = URI(Puppet::Util::Puppetdb.config.server_urls.first)
           host = uri.host
           port = uri.port
@@ -21,8 +21,8 @@ class Hiera
 
         Hiera.debug('Hiera PuppetDB backend starting')
 
-        @puppetdb = PuppetDB::Connection.new(host, port, ssl)
-        @parser = PuppetDB::Parser.new
+        @puppetdb = PuppetDB_2_4::Connection.new(host, port, ssl)
+        @parser = PuppetDB_2_4::Parser.new
       end
 
       def lookup(key, scope, order_override, _resolution_type)

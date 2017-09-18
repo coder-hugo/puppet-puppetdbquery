@@ -13,7 +13,7 @@ Puppet::Functions.create_function('query_nodes') do
   # This is needed if the puppetdb library isn't pluginsynced to the master
   $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
   begin
-    require 'puppetdb-2.3/connection'
+    require 'puppetdb-2.4/connection'
   ensure
     $LOAD_PATH.shift
   end
@@ -28,12 +28,12 @@ Puppet::Functions.create_function('query_nodes') do
   end
 
   def parser
-    @parser ||= PuppetDB::Parser.new
+    @parser ||= PuppetDB_2_4::Parser.new
   end
 
   def puppetdb
     @uri ||= URI(Puppet::Util::Puppetdb.config.server_urls.first)
-    @puppetdb ||= PuppetDB::Connection.new(
+    @puppetdb ||= PuppetDB_2_4::Connection.new(
       @uri.host,
       @uri.port,
       @uri.scheme == 'https'

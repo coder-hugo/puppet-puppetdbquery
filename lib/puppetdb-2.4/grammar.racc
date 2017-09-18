@@ -1,7 +1,7 @@
 # vim: syntax=ruby
 
 
-class PuppetDB::Parser
+class PuppetDB_2_4::Parser
 
   token LPAREN RPAREN LBRACK RBRACK LBRACE RBRACE
   token EQUALS NOTEQUALS MATCH NOTMATCH
@@ -88,10 +88,10 @@ rule
 
 end
 ---- inner
-  include PuppetDB::ParserHelper
+  include PuppetDB_2_4::ParserHelper
 
 ---- header
-require 'puppetdb-2.3'
-require 'puppetdb-2.3/lexer'
-require 'puppetdb-2.3/astnode'
-require 'puppetdb-2.3/parser_helper'
+require 'puppetdb-2.4'
+require 'puppetdb-2.4/lexer'
+require 'puppetdb-2.4/astnode'
+require 'puppetdb-2.4/parser_helper'

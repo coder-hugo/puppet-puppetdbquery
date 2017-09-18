@@ -6,15 +6,15 @@
 
 require 'racc/parser.rb'
 
-require 'puppetdb-2.3'
-require 'puppetdb-2.3/lexer'
-require 'puppetdb-2.3/astnode'
-require 'puppetdb-2.3/parser_helper'
-module PuppetDB
-  class Parser < PuppetDB::Lexer
+require 'puppetdb-2.4'
+require 'puppetdb-2.4/lexer'
+require 'puppetdb-2.4/astnode'
+require 'puppetdb-2.4/parser_helper'
+module PuppetDB_2_4
+  class Parser < PuppetDB_2_4::Lexer
 
 module_eval(<<'...end grammar.racc/module_eval...', 'grammar.racc', 91)
-  include PuppetDB::ParserHelper
+  include PuppetDB_2_4::ParserHelper
 
 ...end grammar.racc/module_eval...
 ##### State transition tables begin ###

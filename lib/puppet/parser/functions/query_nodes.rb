@@ -24,16 +24,16 @@ EOT
   # This is needed if the puppetdb library isn't pluginsynced to the master
   $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..'))
   begin
-    require 'puppetdb-2.3/connection'
+    require 'puppetdb-2.4/connection'
   ensure
     $LOAD_PATH.shift
   end
 
-  PuppetDB::Connection.check_version
+  PuppetDB_2_4::Connection.check_version
 
   uri = URI(Puppet::Util::Puppetdb.config.server_urls.first)
-  puppetdb = PuppetDB::Connection.new(uri.host, uri.port, uri.scheme == 'https')
-  parser = PuppetDB::Parser.new
+  puppetdb = PuppetDB_2_4::Connection.new(uri.host, uri.port, uri.scheme == 'https')
+  parser = PuppetDB_2_4::Parser.new
   if fact_for_query
     query = parser.facts_query(query, [fact_for_query])
     response = puppetdb.query(:facts, query, :extract => :value)
